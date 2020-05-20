@@ -9,12 +9,12 @@ namespace examination_3
         string[] ranks = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace" };
         int[] values = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 };
 
-        public List<Card> DeckOfCards { get; private set; }
+        public List<Card> Cards { get; private set; }
         public int NumberOfCards { get; set; }
 
-        public Deck(int cards = 52)
+        public Deck(int numberOfCards = 52)
         {
-            NumberOfCards = cards;
+            NumberOfCards = numberOfCards;
         }
 
         public void GenerateDeck()
@@ -26,20 +26,20 @@ namespace examination_3
                 for (int i = 0; i < values.Length; i++)
                 {
                     deck.Add(new Card(values[i], (ranks[i] + " of " + suit)));
-                    DeckOfCards = deck;
+                    Cards = deck;
                 }
             }
         }
 
         public void ShuffleDeck()
         {
-            int n = DeckOfCards.ToArray().Length;
+            int n = Cards.ToArray().Length;
             for (int i = 0; i < (n - 1); i++)
             {
                 int r = i + new Random().Next(n - i);
-                Card t = DeckOfCards[r];
-                DeckOfCards[r] = DeckOfCards[i];
-                DeckOfCards[i] = t;
+                Card t = Cards[r];
+                Cards[r] = Cards[i];
+                Cards[i] = t;
             }
         }
     }
