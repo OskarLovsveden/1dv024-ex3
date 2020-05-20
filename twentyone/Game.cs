@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace examination_3
@@ -19,7 +20,10 @@ namespace examination_3
             List<Player> players = new List<Player>();
             for (int i = 0; i < NumberOfPlayers; i++)
             {
-                Player player = new Player("Player" + (i + 1), 15);
+                string name = $"Player{i + 1}";
+                int limit = new Random().Next(15, 20);
+
+                Player player = new Player(name, limit);
                 players.Add(player);
             }
             Players = players;
