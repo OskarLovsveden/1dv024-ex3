@@ -5,14 +5,13 @@ namespace examination_3
 {
     class Game
     {
-        public Deck Deck { get; private set; }
+        public List<Card> Deck21 { get; private set; }
         public int NumberOfPlayers { get; private set; }
         public List<Player> Players { get; private set; }
 
         public Game(int numberOfPlayers)
         {
             NumberOfPlayers = numberOfPlayers;
-            Deck = new Deck();
         }
 
         public void generatePlayers()
@@ -31,8 +30,9 @@ namespace examination_3
 
         public void StartGame()
         {
-            Deck.GenerateDeck();
-            Deck.ShuffleDeck();
+            List<Card> deck = Deck.GenerateDeck();
+            Deck.ShuffleDeck(deck);
+            Deck21 = deck;
         }
     }
 }
