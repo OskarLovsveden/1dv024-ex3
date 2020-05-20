@@ -30,5 +30,17 @@ namespace examination_3
                 }
             }
         }
+
+        public void ShuffleDeck()
+        {
+            int n = DeckOfCards.ToArray().Length;
+            for (int i = 0; i < (n - 1); i++)
+            {
+                int r = i + new Random().Next(n - i);
+                Card t = DeckOfCards[r];
+                DeckOfCards[r] = DeckOfCards[i];
+                DeckOfCards[i] = t;
+            }
+        }
     }
 }
