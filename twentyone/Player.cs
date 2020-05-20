@@ -15,6 +15,17 @@ namespace examination_3
             Limit = limit;
         }
 
+        public override string ToString()
+        {
+            string str = "";
+            foreach (Card card in Cards)
+            {
+                str += card.NumberAndSuit + " ";
+            }
 
+            return Sum <= 21 ?
+                $"{Name}: {str}({Sum})" :
+                $"{Name}: {str}({Sum}) BUSTED!";
+        }
     }
 }
