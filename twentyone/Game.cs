@@ -56,7 +56,13 @@ namespace examination_3
                 // While player has not reached limit...
                 while (player.SumOfHand() < player.Limit)
                 {
-
+                    // If drawpile is at 1 card...
+                    if (DrawPile.Cards.Count == 1)
+                    {
+                        // ...merge drawpile and throwpile
+                        DrawPile.Cards = DrawPile.Cards.Concat(ThrowPile).ToList();
+                        ThrowPile = new List<Card>();
+                    }
 
                     // ...deal a card to the player
                     Card drawnCard = DrawPile.Draw();
