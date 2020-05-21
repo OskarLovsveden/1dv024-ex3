@@ -57,6 +57,10 @@ namespace examination_3
                 while (player.SumOfHand() < player.Limit)
                 {
 
+
+                    // ...deal a card to the player
+                    Card drawnCard = DrawPile.Draw();
+                    player.Cards.Add(drawnCard);
                 }
 
                 // Throw player hand when done
