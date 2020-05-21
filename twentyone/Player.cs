@@ -15,14 +15,16 @@ namespace examination_3
         public override string ToString()
         {
             string str = "";
+            int sum = SumOfHand();
+
             foreach (Card card in Cards)
             {
-                str += $"{card.Rank}{card.Suit} ";
+                str += $"[{card.Rank} of {card.Suit}] ";
             }
 
-            return Sum <= 21 ?
-                $"{Name}: {str}({Sum})" :
-                $"{Name}: {str}({Sum}) BUSTED!";
+            return sum <= 21 ?
+                $"{Name}: {str}({sum})" :
+                $"{Name}: {str}({sum}) BUSTED!";
         }
     }
 }
