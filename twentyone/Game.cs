@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace examination_3
 {
@@ -16,7 +17,6 @@ namespace examination_3
             DrawPile = new Deck();
             DrawPile.Shuffle();
             ThrowPile = new List<Card>();
-
         }
 
         public void GeneratePlayers()
@@ -42,10 +42,22 @@ namespace examination_3
             }
         }
 
-        public void StartGame()
+        public void Play()
         {
+            // Generate players
             GeneratePlayers();
+
+            // Deal one card to each player
             DealOneCardEach();
+
+            // Loop players
+            foreach (Player player in Players)
+            {
+
+
+                // Throw player hand when done
+                ThrowPile = ThrowPile.Concat(player.Cards).ToList();
+            }
             // Console.WriteLine($"{drawnCard.Rank} of {drawnCard.Suit} with value: {drawnCard.Value}");
             // ThrowPile.Add(drawnCard);
             // Console.WriteLine(DrawPile.Cards.ToArray().Length);
