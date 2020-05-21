@@ -53,7 +53,11 @@ namespace examination_3
             // Loop players
             foreach (Player player in Players)
             {
+                // While player has not reached limit...
+                while (player.SumOfHand() < player.Limit)
+                {
 
+                }
 
                 // Throw player hand when done
                 ThrowPile = ThrowPile.Concat(player.Cards).ToList();
