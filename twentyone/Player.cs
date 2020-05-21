@@ -2,8 +2,8 @@ namespace examination_3
 {
     class Player : Hand
     {
-        public string Name { get; private set; }
-        public int Limit { get; private set; }
+        public string Name { get; set; }
+        public int Limit { get; set; }
 
         public Player(string name, int limit)
         : base()
@@ -17,7 +17,7 @@ namespace examination_3
             string str = "";
             foreach (Card card in Cards)
             {
-                str += card.NumberAndSuit + " ";
+                str += $"{card.Rank}{card.Suit} ";
             }
 
             return Sum <= 21 ?
