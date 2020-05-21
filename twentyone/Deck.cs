@@ -59,6 +59,14 @@ namespace examination_3
             }
         }
 
+        public Card Draw()
+        {
+            var drawnCard = Cards.First();
+            Cards.Remove(drawnCard);
+
+            return drawnCard;
+        }
+
         public List<Card> Draw(int count)
         {
             var drawnCards = Cards.Take(count).ToList();
