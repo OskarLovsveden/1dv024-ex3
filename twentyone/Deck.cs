@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace examination_3
 {
@@ -11,79 +12,37 @@ namespace examination_3
         {
             Cards = new List<Card>();
 
-            int[] value = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 };
+            int[] value = { 2, 3, 4, 5, 6, 7, 8, 9, 10 };
             int index = 0;
 
             foreach (CardSuit suit in Enum.GetValues(typeof(CardSuit)))
             {
+                index = 0;
+
                 foreach (CardRank rank in Enum.GetValues(typeof(CardRank)))
                 {
                     switch (rank)
                     {
                         case CardRank.Jack:
-                            Cards.Add(new Card()
-                            {
-                                Suit = suit,
-                                Rank = rank,
-                                Value = 11
-                            });
+                            Cards.Add(new Card(suit, rank, 11));
                             break;
                         case CardRank.Queen:
-                            Cards.Add(new Card()
-                            {
-                                Suit = suit,
-                                Rank = rank,
-                                Value = 12
-                            });
+                            Cards.Add(new Card(suit, rank, 12));
                             break;
                         case CardRank.King:
-                            Cards.Add(new Card()
-                            {
-                                Suit = suit,
-                                Rank = rank,
-                                Value = 13
-                            });
+                            Cards.Add(new Card(suit, rank, 13));
                             break;
                         case CardRank.Ace:
-                            Cards.Add(new Card()
-                            {
-                                Suit = suit,
-                                Rank = rank,
-                                Value = 14
-                            });
+                            Cards.Add(new Card(suit, rank, 14));
                             break;
                         default:
-                            Cards.Add(new Card()
-                            {
-                                Suit = suit,
-                                Rank = rank,
-                                Value = value[index]
-                            });
+                            Cards.Add(new Card(suit, rank, value[index]));
                             break;
                     }
                     index++;
                 }
             }
         }
-        // public static Card[] GenerateDeck()
-        // {
-        //     // var cardValue = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 };
-
-        //     Card[] deck = new Card[52];
-
-        //     int index = 0;
-
-        //     foreach (var suit in suits)
-        //     {
-        //         for (int i = 0; i < values.Length; i++)
-        //         {
-        //             (new Card(values[i], (ranks[i] + " of " + suit)));
-        //             index++;
-        //         }
-        //     }
-
-        //     return deck;
-        // }
 
         public void Shuffle()
         {
