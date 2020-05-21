@@ -69,13 +69,26 @@ namespace examination_3
                     player.Cards.Add(drawnCard);
                 }
 
+                // Player loses / busted
+                if (player.SumOfHand() > 21)
+                {
+                    Console.WriteLine("Busted! Dealer Wins");
+                }
+                // Player Wins
+                else if (player.SumOfHand() == 21 || player.Cards.Count == 5)
+                {
+                    Console.WriteLine("Player Wins");
+                }
+                // Dealer plays vs current player.
+                else
+                {
+                    Dealer dealer = new Dealer(player.SumOfHand());
+                    Console.WriteLine("Dealer vs Player");
+                }
+
                 // Throw player hand when done
                 ThrowPile = ThrowPile.Concat(player.Cards).ToList();
             }
-            // Console.WriteLine($"{drawnCard.Rank} of {drawnCard.Suit} with value: {drawnCard.Value}");
-            // ThrowPile.Add(drawnCard);
-            // Console.WriteLine(DrawPile.Cards.ToArray().Length);
-            // Console.WriteLine(ThrowPile.ToArray().Length);
         }
     }
 }
