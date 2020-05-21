@@ -8,6 +8,11 @@ namespace examination_3
         public int Aces { get; private set; }
         public int Sum { get; private set; }
 
+        public Hand()
+        {
+            Cards = new List<Card>();
+        }
+
         public void SumOfHand()
         {
             foreach (Card card in Cards)
