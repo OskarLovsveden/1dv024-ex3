@@ -74,12 +74,14 @@ namespace examination_3
                 // Player loses / busted
                 if (player.SumOfHand() > 21)
                 {
-                    Console.WriteLine("Busted! Dealer Wins");
+                    Console.WriteLine("Dealer Wins");
+                    Console.WriteLine(player.ToString());
                 }
                 // Player Wins
                 else if (player.SumOfHand() == 21 || player.Cards.Count == 5)
                 {
                     Console.WriteLine("Player Wins");
+                    Console.WriteLine(player.ToString());
                 }
                 // Dealer plays vs current player.
                 else
@@ -108,11 +110,15 @@ namespace examination_3
                     if ((dealer.SumOfHand() > player.SumOfHand() && dealer.SumOfHand() <= 21) || dealer.SumOfHand() == player.SumOfHand())
                     {
                         Console.WriteLine("Dealer Wins");
+                        Console.WriteLine(player.ToString());
+                        Console.WriteLine(dealer.ToString());
                     }
                     // ELSE player wins
                     else
                     {
                         Console.WriteLine("Player Wins");
+                        Console.WriteLine(player.ToString());
+                        Console.WriteLine(dealer.ToString());
                     }
 
                     // Throw dealer hand when done
