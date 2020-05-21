@@ -58,5 +58,13 @@ namespace examination_3
                 cards[k] = temp;
             }
         }
+
+        public List<Card> Draw(int count)
+        {
+            var drawnCards = Cards.Take(count).ToList();
+            Cards.RemoveAll(x => drawnCards.Contains(x));
+
+            return drawnCards;
+        }
     }
 }
