@@ -53,15 +53,17 @@ namespace examination_3
             // Loop players
             foreach (Player player in Players)
             {
+                Console.WriteLine("_____");
                 // While player has not reached limit...
                 while (player.SumOfHand() < player.Limit)
                 {
                     // If drawpile is at 1 card...
                     if (DrawPile.Cards.Count == 1)
                     {
-                        // ...merge drawpile and throwpile
+                        // ...merge drawpile with throwpile and shuffle
                         DrawPile.Cards = DrawPile.Cards.Concat(ThrowPile).ToList();
                         ThrowPile = new List<Card>();
+                        DrawPile.Shuffle();
                     }
 
                     // ...deal a card to the player
@@ -84,6 +86,37 @@ namespace examination_3
                 {
                     Dealer dealer = new Dealer(player.SumOfHand());
                     Console.WriteLine("Dealer vs Player");
+
+                    // While dealer has not reached limit...
+                    while (dealer.SumOfHand() < dealer.Limit)
+                    {
+                        // If drawpile is at 1 card...
+                        if (DrawPile.Cards.Count == 1)
+                        {
+                            // ...merge drawpile with throwpile and shuffle
+                            DrawPile.Cards = DrawPile.Cards.Concat(ThrowPile).ToList();
+                            ThrowPile = new List<Card>();
+                            DrawPile.Shuffle();
+                        }
+
+                        // ...deal a card to the dealer
+                        Card drawnCard = DrawPile.Draw();
+                        dealer.Cards.Add(drawnCard);
+                    }
+
+                    // IF dealer sum is higher than current player sum AND is lower than or equal to 21 OR dealer sum is equal to player sum
+                    if ((dealer.SumOfHand() > player.SumOfHand() && dealer.SumOfHand() <= 21) || dealer.SumOfHand() == player.SumOfHand())
+                    {
+                        Console.WriteLine("Dealer Wins");
+                    }
+                    // ELSE player wins
+                    else
+                    {
+                        Console.WriteLine("Player Wins");
+                    }
+
+                    // Throw dealer hand when done
+                    ThrowPile = ThrowPile.Concat(dealer.Cards).ToList();
                 }
 
                 // Throw player hand when done
