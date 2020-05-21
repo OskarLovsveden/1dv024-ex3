@@ -6,29 +6,32 @@ namespace examination_3
     {
         public List<Card> Cards { get; set; }
         public int Aces { get; private set; }
-        public int Sum { get; private set; }
 
         public Hand()
         {
             Cards = new List<Card>();
         }
 
-        public void SumOfHand()
+        public int SumOfHand()
         {
+            int sum = 0;
+
             foreach (Card card in Cards)
             {
                 if (card.Value == 14)
                 {
                     Aces++;
                 }
-                Sum += card.Value;
+                sum += card.Value;
             }
 
-            if (Aces > 0 && Sum > 21)
+            if (Aces > 0 && sum > 21)
             {
-                Sum -= Aces * 13;
+                sum -= Aces * 13;
                 Aces = 0;
             }
+
+            return sum;
         }
     }
 }
