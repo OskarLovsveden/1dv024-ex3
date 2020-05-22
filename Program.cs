@@ -1,4 +1,9 @@
-﻿using System;
+﻿/// <summary>
+/// https://www.exceptionnotfound.net/modeling-practice-uno-in-c-sharp-part-one-rules-assumptions-cards/
+/// Used this for inspiration on creating cards/decks
+/// </summary>
+
+using System;
 
 namespace examination_3
 {
