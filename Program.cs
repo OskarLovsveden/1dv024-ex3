@@ -6,7 +6,16 @@ namespace examination_3
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            try
+            {
+                // Start game with number of players (1-40)
+                Game game = new Game(25);
+                game.Play();
+            }
+            catch (Exception error)
+            {
+                Console.WriteLine(error.Message);
+            }
         }
     }
 }
