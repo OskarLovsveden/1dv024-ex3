@@ -2,17 +2,26 @@ using System.Collections.Generic;
 
 namespace examination_3
 {
+    /// <summary>
+    /// Class representing a Hand of cards
+    /// </summary>
     abstract class Hand
     {
         public List<Card> Cards { get; private set; }
         public int Aces { get; private set; }
         public int SumOfHand { get; private set; }
 
+        /// <summary>
+        /// Public constructor for new empty hand.
+        /// </summary>
         public Hand()
         {
             Cards = new List<Card>();
         }
 
+        /// <summary>
+        /// Add all cards' values in the hand and sets property SumOfHand to its total value
+        /// </summary>
         public void AddUpHand()
         {
             SumOfHand = 0;

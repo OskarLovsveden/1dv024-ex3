@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace examination_3
 {
+    /// <summary>
+    /// Class representing a Game of twenty-one(21)
+    /// </summary>
     class Game
     {
         public Deck DrawPile { get; private set; }
@@ -11,6 +14,11 @@ namespace examination_3
         public int NumberOfPlayers { get; private set; }
         public List<Player> Players { get; private set; }
 
+        /// <summary>
+        /// Public constructor for new game of 21.
+        /// Takes a parameter for numer of players.
+        /// </summary>
+        /// <param name="numberOfPlayers">Number of players to participate in this game of 21</param>
         public Game(int numberOfPlayers)
         {
             NumberOfPlayers = numberOfPlayers;
@@ -18,6 +26,9 @@ namespace examination_3
             ThrowPile = new List<Card>();
         }
 
+        /// <summary>
+        /// Generates players with random limits and sets property Players to the generated players
+        /// </summary>
         public void GeneratePlayers()
         {
             if (NumberOfPlayers < 0 || NumberOfPlayers > 40) throw new ArgumentOutOfRangeException();
@@ -34,6 +45,9 @@ namespace examination_3
             Players = players;
         }
 
+        /// <summary>
+        /// Loops all players and deals one card each from DrawPile
+        /// </summary>
         public void DealOneCardEach()
         {
             foreach (Player player in Players)
@@ -42,109 +56,102 @@ namespace examination_3
                 player.Cards.Add(drawnCard);
             }
         }
+
+        /// <summary>
+        /// Merges ThrowPile into Drawpile and sets ThrowPile to and empty list
+        /// </summary>
         public void MergeDrawThrow()
         {
             DrawPile.Cards = DrawPile.Cards.Concat(ThrowPile).ToList();
             ThrowPile = new List<Card>();
-            DrawPile.Shuffle();
         }
 
+        /// <summary>
+        /// Plays one "round" for either a player or the dealer
+        /// </summary>
+        /// <param name="playerOrDealer">Player or dealer that should play the "round"</param>
         public void PlayRound(Player playerOrDealer)
         {
-            // If drawpile is at 1 card...
             if (DrawPile.Cards.Count == 1)
             {
-                // ...merge drawpile with throwpile and shuffle
                 MergeDrawThrow();
+                DrawPile.Shuffle();
             }
 
-            // ...deal a card to the player or dealer
             Card drawnCard = DrawPile.Draw();
             playerOrDealer.Cards.Add(drawnCard);
             playerOrDealer.AddUpHand();
         }
 
+        /// <summary>
+        /// Merges("throws") the given player or dealers hand of cards into ThrowPile
+        /// </summary>
+        /// <param name="playerOrDealer">Player or dealer for which to throw hand of cards</param>
         public void ThrowHand(Player playerOrDealer)
         {
             ThrowPile = ThrowPile.Concat(playerOrDealer.Cards).ToList();
         }
 
-        public static void LogResult(bool playerWin, Player player, Player dealer)
+        /// <summary>
+        /// Prints the result of a full round
+        /// </summary>
+        /// <param name="playerWin">Boolean value representing player win</param>
+        /// <param name="player">Player to print result for</param>
+        /// <param name="dealer">Dealer to print result for</param>
+        public static void PrintResult(bool playerWin, Player player, Player dealer)
         {
-            if (playerWin)
-            {
-                System.Console.WriteLine("Player Wins!");
-                System.Console.WriteLine(player.ToString());
-                System.Console.WriteLine(dealer.ToString());
-            }
-            else
-            {
-                System.Console.WriteLine("Dealer Wins!");
-                System.Console.WriteLine(player.ToString());
-                System.Console.WriteLine(dealer.ToString());
-            }
+            string output = playerWin ? $"Player Wins!\n{player.ToString()}\n{dealer.ToString()}" : $"Dealer Wins!\n{player.ToString()}\n{dealer.ToString()}";
+            Console.WriteLine(output);
+            Console.WriteLine();
         }
 
+        /// <summary>
+        /// Play the game
+        /// </summary>
         public void Play()
         {
-            // Shuffle deck
             DrawPile.Shuffle();
-
-            // Generate players
             GeneratePlayers();
-
-            // Deal one card to each player
             DealOneCardEach();
 
-            // Loop players
             foreach (Player player in Players)
             {
-                Console.WriteLine("_____");
-                // While player has not reached limit...
                 while (player.SumOfHand < player.Limit)
                 {
                     PlayRound(player);
                 }
 
-                // Player loses / busted
                 if (player.SumOfHand > 21)
                 {
                     Player dummyDealer = new Dealer();
-                    LogResult(false, player, dummyDealer);
+                    PrintResult(false, player, dummyDealer);
                 }
-                // Player Wins
                 else if (player.SumOfHand == 21 || player.Cards.Count == 5)
                 {
                     Player dummyDealer = new Dealer();
-                    LogResult(true, player, dummyDealer);
+                    PrintResult(true, player, dummyDealer);
                 }
-                // Dealer plays vs current player.
                 else
                 {
                     Dealer dealer = new Dealer(player.SumOfHand);
 
-                    // While dealer has not reached limit...
                     while (dealer.SumOfHand < dealer.Limit)
                     {
                         PlayRound(dealer);
                     }
 
-                    // IF dealer sum is higher than current player sum AND is lower than or equal to 21 OR dealer sum is equal to player sum
                     if ((dealer.SumOfHand > player.SumOfHand && dealer.SumOfHand <= 21) || dealer.SumOfHand == player.SumOfHand)
                     {
-                        LogResult(false, player, dealer);
+                        PrintResult(false, player, dealer);
                     }
-                    // ELSE player wins
                     else
                     {
-                        LogResult(true, player, dealer);
+                        PrintResult(true, player, dealer);
                     }
 
-                    // Throw dealer hand when done
                     ThrowHand(dealer);
                 }
 
-                // Throw player hand when done
                 ThrowHand(player);
             }
         }

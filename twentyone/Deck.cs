@@ -4,10 +4,16 @@ using System.Linq;
 
 namespace examination_3
 {
+    /// <summary>
+    /// Class representing a deck of cards
+    /// </summary>
     class Deck
     {
         public List<Card> Cards { get; set; }
 
+        /// <summary>
+        /// Public constructor for creating a new deck of cards
+        /// </summary>
         public Deck()
         {
             Cards = new List<Card>();
@@ -44,6 +50,9 @@ namespace examination_3
             }
         }
 
+        /// <summary>
+        /// Shuffles the deck of cards
+        /// </summary>
         public void Shuffle()
         {
             Random r = new Random();
@@ -59,6 +68,10 @@ namespace examination_3
             }
         }
 
+        /// <summary>
+        /// Returns the top card of the deck
+        /// </summary>
+        /// <returns>The top card</returns>
         public Card Draw()
         {
             var drawnCard = Cards.First();
@@ -67,6 +80,11 @@ namespace examination_3
             return drawnCard;
         }
 
+        /// <summary>
+        /// Returns mutiple top cards of the deck
+        /// </summary>
+        /// <param name="count">Amount of cards to draw</param>
+        /// <returns>The top cards matching the amount of count</returns>
         public List<Card> Draw(int count)
         {
             var drawnCards = Cards.Take(count).ToList();
