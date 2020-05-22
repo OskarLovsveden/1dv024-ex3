@@ -1,3 +1,5 @@
+using System;
+
 namespace examination_3
 {
     class Player : Hand
@@ -23,8 +25,8 @@ namespace examination_3
             }
 
             return sum <= 21 ?
-                $"{Name}: {str}({sum})" :
-                $"{Name}: {str}({sum}) BUSTED!";
+                String.Format("{0,-12}: Sum: ({1}) {2}", Name, sum, str) :
+                String.Format("{0,-12}: Sum: ({1}) {2} BUSTED!", Name, sum, str);
         }
     }
 }
