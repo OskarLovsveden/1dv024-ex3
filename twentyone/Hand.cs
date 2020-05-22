@@ -4,17 +4,18 @@ namespace examination_3
 {
     abstract class Hand
     {
-        public List<Card> Cards { get; set; }
+        public List<Card> Cards { get; private set; }
         public int Aces { get; private set; }
+        public int SumOfHand { get; private set; }
 
         public Hand()
         {
             Cards = new List<Card>();
         }
 
-        public int SumOfHand()
+        public void AddUpHand()
         {
-            int sum = 0;
+            SumOfHand = 0;
 
             foreach (Card card in Cards)
             {
@@ -22,16 +23,14 @@ namespace examination_3
                 {
                     Aces++;
                 }
-                sum += card.Value;
+                SumOfHand += card.Value;
             }
 
-            if (Aces > 0 && sum > 21)
+            if (Aces > 0 && SumOfHand > 21)
             {
-                sum -= Aces * 13;
+                SumOfHand -= Aces * 13;
                 Aces = 0;
             }
-
-            return sum;
         }
     }
 }
