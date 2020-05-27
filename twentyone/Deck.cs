@@ -9,15 +9,14 @@ namespace examination_3
     /// </summary>
     class Deck
     {
-        public List<Card> Cards { get; set; }
+        private List<Card> _cards = new List<Card>();
+        public List<Card> Cards { get => _cards; set => _cards = value; }
 
         /// <summary>
         /// Public constructor for creating a new deck of cards
         /// </summary>
         public Deck()
         {
-            Cards = new List<Card>();
-
             int[] value = { 2, 3, 4, 5, 6, 7, 8, 9, 10 };
             int index = 0;
 
@@ -30,19 +29,19 @@ namespace examination_3
                     switch (rank)
                     {
                         case CardRank.Jack:
-                            Cards.Add(new Card(suit, rank, 11));
+                            _cards.Add(new Card(suit, rank, 11));
                             break;
                         case CardRank.Queen:
-                            Cards.Add(new Card(suit, rank, 12));
+                            _cards.Add(new Card(suit, rank, 12));
                             break;
                         case CardRank.King:
-                            Cards.Add(new Card(suit, rank, 13));
+                            _cards.Add(new Card(suit, rank, 13));
                             break;
                         case CardRank.Ace:
-                            Cards.Add(new Card(suit, rank, 14));
+                            _cards.Add(new Card(suit, rank, 14));
                             break;
                         default:
-                            Cards.Add(new Card(suit, rank, value[index]));
+                            _cards.Add(new Card(suit, rank, value[index]));
                             break;
                     }
                     index++;
@@ -57,14 +56,12 @@ namespace examination_3
         {
             Random r = new Random();
 
-            List<Card> cards = Cards;
-
-            for (int n = cards.Count - 1; n > 0; --n)
+            for (int n = Cards.Count - 1; n > 0; --n)
             {
                 int k = r.Next(n + 1);
-                Card temp = cards[n];
-                cards[n] = cards[k];
-                cards[k] = temp;
+                Card temp = Cards[n];
+                Cards[n] = Cards[k];
+                Cards[k] = temp;
             }
         }
 
@@ -74,7 +71,7 @@ namespace examination_3
         /// <returns>The top card</returns>
         public Card Draw()
         {
-            var drawnCard = Cards.First();
+            Card drawnCard = Cards.First();
             Cards.Remove(drawnCard);
 
             return drawnCard;
@@ -87,7 +84,7 @@ namespace examination_3
         /// <returns>The top cards matching the amount of count</returns>
         public List<Card> Draw(int count)
         {
-            var drawnCards = Cards.Take(count).ToList();
+            List<Card> drawnCards = Cards.Take(count).ToList();
             Cards.RemoveAll(x => drawnCards.Contains(x));
 
             return drawnCards;

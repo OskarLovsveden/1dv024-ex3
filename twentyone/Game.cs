@@ -37,7 +37,7 @@ namespace examination_3
             for (int i = 0; i < NumberOfPlayers; i++)
             {
                 string name = $"Player #{i + 1}";
-                int limit = new Random().Next(15, 20);
+                int limit = new Random().Next(14, 17);
 
                 Player player = new Player(name, limit);
                 players.Add(player);
@@ -53,7 +53,7 @@ namespace examination_3
             foreach (Player player in Players)
             {
                 Card drawnCard = DrawPile.Draw();
-                player.Cards.Add(drawnCard);
+                player.takeCard(drawnCard);
             }
         }
 
@@ -62,7 +62,8 @@ namespace examination_3
         /// </summary>
         public void MergeDrawThrow()
         {
-            DrawPile.Cards = DrawPile.Cards.Concat(ThrowPile).ToList();
+            List<Card> mergedList = DrawPile.Cards.Concat(ThrowPile).ToList();
+            DrawPile.Cards = mergedList;
             ThrowPile = new List<Card>();
         }
 
@@ -79,7 +80,7 @@ namespace examination_3
             }
 
             Card drawnCard = DrawPile.Draw();
-            playerOrDealer.Cards.Add(drawnCard);
+            playerOrDealer.takeCard(drawnCard);
             playerOrDealer.AddUpHand();
         }
 

@@ -14,7 +14,7 @@ namespace examination_3
             try
             {
                 // Start game with number of players (1-40)
-                Game game = new Game(25);
+                Game game = new Game(40);
                 game.Play();
             }
             catch (Exception error)
