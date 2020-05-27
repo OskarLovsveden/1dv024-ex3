@@ -24,6 +24,15 @@ namespace examination_3
         }
 
         /// <summary>
+        /// Player takes a card and adds it to its hand
+        /// </summary>
+        /// <param name="card">The Card to be added to the hand</param>
+        public void takeCard(Card card)
+        {
+            Cards.Add(card);
+        }
+
+        /// <summary>
         /// Returns a string representing the current state for the player in the game 
         /// </summary>
         /// <returns>A string</returns>
